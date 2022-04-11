@@ -12,10 +12,10 @@ Plug 'honza/vim-snippets'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " rust
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " typescript
-Plug 'leafgarland/typescript-vim'
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescriptreact'] }
 Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty'    
 Plug 'alvan/vim-closetag'
@@ -32,13 +32,13 @@ Plug 'tpope/vim-surround'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'luochen1990/rainbow'
 Plug 'jiangmiao/auto-pairs'
+Plug 'brooth/far.vim'
 
 " color
-Plug 'sickill/vim-monokai'
-
 Plug '907th/vim-auto-save'
 
 Plug 'jparise/vim-graphql'
+Plug 'cespare/vim-toml'
 
 call plug#end()
 
@@ -46,10 +46,11 @@ let mapleader = "\<Space>"
 
 nmap<C-q> :NERDTreeToggle<CR>
 nmap f <Plug>(easymotion-overwin-f)
-nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :GFiles<CR>
 command! -bang -nargs=* Rg call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".shellescape(<q-args>), 1, {'options': '--delimiter : --nth 4..'}, <bang>0)
 
 nnoremap <C-f> :Rg<CR>
+inoremap <silent> jj <ESC>
 
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -65,13 +66,13 @@ autocmd TermOpen * startinsert
 command! -nargs=* T split | wincmd j | resize 20 | terminal <args>
 
 "lsp
-nmap <silent> gd <Plug>(coc-definition)
+nmap <C-d> <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>.  <Plug>(coc-codeaction)
+nmap <C-i> <Plug>(coc-implementation)
+nmap <C-r> <Plug>(coc-references)
+nmap <C-.> <Plug>(coc-codeaction)
 nmap <leader>qf  <Plug>(coc-fix-current)
-nmap <leader>ac  <Plug>(coc-codelens-action)
+nmap <silent>ac  <Plug>(coc-codelens-action)
 nmap <silent>gh :<C-u>call CocAction('doHover')<cr>
 
 let g:auto_save = 1
@@ -109,7 +110,7 @@ set title
 
 filetype plugin indent on
 syntax enable
-colorscheme molokai
+colorscheme solarized
 
 set completeopt+=menuone
 set tabstop=2
